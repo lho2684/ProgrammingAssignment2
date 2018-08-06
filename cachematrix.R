@@ -3,7 +3,8 @@
 ## Response: the functions cache the inverse of a matrix
 
 ## Write a short comment describing this function
-## Response: Creates a matrix object (x) and calculates the inverse of the object to be cached
+## Response: Creates a matrix object (x) with user input, and calculates the inverse 
+## of the object that can be cached.
 makeCacheMatrix <- function(x = matrix()) {
         m <- NULL
         set <- function(y) {
@@ -11,7 +12,7 @@ makeCacheMatrix <- function(x = matrix()) {
                 m <<- NULL
         }
         get <- function () x
-        setinverse <- function(solve) m <<- solve
+        setinverse <- function(inverse) m <<- inverse
         getinverse <- function() m
         list(set = set, get = get, 
              setinverse = setinverse,
@@ -20,7 +21,8 @@ makeCacheMatrix <- function(x = matrix()) {
 
 
 ## Write a short comment describing this function
-## Return a matrix that is the inverse of 'x'
+## Response: Returns a matrix that is the inverse of 'x', if the inverse has been calculated,
+## then the function retrieves the inverse from the cache.
 cacheSolve <- function(x, ...) {
         m <- x$getinverse()
         if (!is.null(m)) {
@@ -28,7 +30,7 @@ cacheSolve <- function(x, ...) {
                 return(m)
         }
         data <- x$get()
-        m <- matrix(data,...)
+        m <- solve(data,...)
         x$setinverse(m)
         m
 }
